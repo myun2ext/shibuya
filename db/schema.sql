@@ -7,10 +7,10 @@ CREATE TABLE users (
   id BIGINT NOT NULL AUTO_INCREMENT,
   name VARCHAR(64) NOT NULL,
   screen_name VARCHAR(128) NOT NULL,
-  encrypted_password VARCHAR(128) NOT NULL,
-  password_salt VARCHAR(64) NOT NULL,
+  encrypted_password CHAR(128) NOT NULL,
+  password_salt CHAR(64) NOT NULL,
   created_at datetime NOT NULL,
-  last_sign_in_at datetime NOT NULL,
+  last_sign_in_at datetime,
   PRIMARY KEY (id)
 );
 CREATE UNIQUE INDEX user_name_idx ON users (name);
