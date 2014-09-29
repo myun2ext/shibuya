@@ -1,5 +1,9 @@
 require 'sinatra'
 
-get '/' do
-  'Hello world!'
+module Shibuya
+  class App < Sinatra::Base
+    get '/' do
+      'Hello world!'
+    end
+  end
 end
