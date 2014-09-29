@@ -1,6 +1,6 @@
 #/bin/sh
 
-if [ "$1" = "start" ]; then
+if [ "$1" = "start" -o -z "$1" ]; then
   if [ -e /tmp/myun2.shibuya.unicorn.pid ]; then
     echo "Unicorn process has already been started."
   else
