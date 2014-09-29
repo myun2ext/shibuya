@@ -41,7 +41,9 @@ ALTER TABLE favorites ADD FOREIGN KEY(node_id) REFERENCES nodes(id);
 CREATE TABLE chat_logs (
   id BIGINT NOT NULL AUTO_INCREMENT,
   node_id BIGINT NOT NULL,
+  user_id BIGINT NOT NULL,
   created_at datetime NOT NULL,
   PRIMARY KEY (id)
 );
 ALTER TABLE chat_logs ADD FOREIGN KEY(node_id) REFERENCES nodes(id);
+ALTER TABLE chat_logs ADD FOREIGN KEY(user_id) REFERENCES users(id);
