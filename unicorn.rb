@@ -7,7 +7,7 @@ timeout 300
 
 workdir = Dir::pwd
 FileUtils.mkdir_p(workdir + "/tmp")
-#tmpdir = workdir + "/tmp"
+#tmpdir = workdir + "/tmp/"
 tmpdir = "/tmp/"
 
 #pidfile = workdir + "/tmp/unicorn.pid"
@@ -18,7 +18,7 @@ pid(pidfile)
 listen(sockfile)
 
 # Logging directory
-logdir = workdir + "/log"
+logdir = workdir + "/log/"
 FileUtils.mkdir_p(logdir)
 stderr_path(logdir + "unicorn.stderr.log")
 stdout_path(logdir + "unicorn.stdout.log")
