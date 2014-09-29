@@ -20,6 +20,7 @@ CREATE TABLE nodes (
   id BIGINT NOT NULL AUTO_INCREMENT,
   parent_node_id BIGINT,
   name VARCHAR(64) NOT NULL,
+  color CHAR(6) NOT NULL,
   screen_name VARCHAR(256) NOT NULL,
   created_at datetime NOT NULL,
   PRIMARY KEY (id)
@@ -34,6 +35,7 @@ CREATE TABLE favorites (
   created_at datetime NOT NULL,
   PRIMARY KEY (user_id, node_id)
 );
+CREATE UNIQUE INDEX favorite_idx ON favorites (user_id, node_id);
 ALTER TABLE favorites ADD FOREIGN KEY(user_id) REFERENCES users(id);
 ALTER TABLE favorites ADD FOREIGN KEY(node_id) REFERENCES nodes(id);
 
