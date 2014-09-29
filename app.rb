@@ -5,5 +5,9 @@ module Shibuya
     get '/' do
       File.read(File.join('public', 'html', 'index.html'))
     end
+
+    get '/nodes/*' do
+      File.read(File.join('public', 'html', 'index.html'))
+    end
   end
 end
