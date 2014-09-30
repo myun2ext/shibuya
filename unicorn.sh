@@ -4,7 +4,7 @@ if [ "$1" = "start" -o -z "$1" ]; then
   if [ -e /tmp/myun2.shibuya.unicorn.pid ]; then
     echo "Unicorn process has already been started."
   else
-    unicorn -c unicorn.rb -E production -D
+    bundle exec unicorn -c unicorn.rb -E production -D
     echo "Unicorn startuped"
   fi
 
