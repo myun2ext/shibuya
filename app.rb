@@ -34,6 +34,7 @@ module Shibuya
     end
 
     get '/nodes/*' do
+      @nodes = Node.children(1, db_connection)
       erb :index
     end
   end

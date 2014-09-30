@@ -12,7 +12,7 @@ module Shibuya
     end
 
     def path
-      name
+      name.downcase.gsub(" ", "_")
     end
 
     def self.children(id, db_connection)
