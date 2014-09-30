@@ -10,5 +10,12 @@ module Shibuya
       @screen_name = params[:screen_name]
       @created_at = params[:created_at]
     end
+
+    def self.children(id, db_connection)
+      result = db_connection.xquery(
+        "SELECT * from nodes where parent_node_id = :parent_node_id",
+        parent_node_id: id)
+      result.map { |node| Node.new(node) }
+    end
   end
 end
