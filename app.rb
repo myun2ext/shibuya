@@ -30,7 +30,7 @@ module Shibuya
           if @node_path.length == 0
             node = Node.find_by_name(name, db_connection)
           else
-            node = Node.find_by_name_of_children(@node_path.last, name, db_connection)
+            node = Node.find_by_name_of_children(@node_path.last.id, name, db_connection)
           end
           if node == nil
             return erb "404"
@@ -43,6 +43,7 @@ module Shibuya
 
     get /\A\/(nodes\/?)?\z/ do
       @nodes = Node.children(1, db_connection)
+      @node_path = []
       erb :index
     end
 
