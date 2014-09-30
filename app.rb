@@ -34,7 +34,17 @@ module Shibuya
     end
 
     get '/nodes/*' do
-      @nodes = Node.children(1, db_connection)
+      path = params[:splat].split("/")
+      @node_path = []
+      path.each do |name|
+        if @node_path.length == 0
+          @node_path << Node.find_by_name(name, db_connection)
+        else
+          @node_path << Node.find_by_name_of_children(@node_path.last, name, db_connection)
+        end
+      end
+      @nodes = Node.children(@node_path.last.id, db_connection)
+
       erb :index
     end
   end
