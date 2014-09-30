@@ -11,7 +11,10 @@ module Shibuya
     end
 
     def select(table, params)
-      connection.xquery(Query::Select.new(table, params).query)
+      q = Query::Select.new(table, params)
+      p q.query
+      p q.params
+      connection.xquery(q.query, q.params)
     end
   end
 end
