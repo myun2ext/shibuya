@@ -41,7 +41,7 @@ module Shibuya
       end
     end
 
-    get '/' do
+    get /\A\/(nodes\/?)?\z/ do
       @nodes = Node.children(1, db_connection)
       erb :index
     end
