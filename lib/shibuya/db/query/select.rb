@@ -1,7 +1,7 @@
 module Shibuya
-  module Db
+  class Db
     module Query
-      module Select
+      class Select
         attr_reader :query, :params
 
         def initialize(table, params)
@@ -13,9 +13,9 @@ module Shibuya
             conditions = params[:where]
             conditions = [conditions] unless conditions.is_a? Array
             conditions.map do |where|
-              where.gsub!(/:[\w]+/) do
-                @params += $1
-                params[$1]
+              where.gsub!(/:([\w]+)/) do
+                @params << params[$1.to_sym]
+                "?"
               end
             end
 
