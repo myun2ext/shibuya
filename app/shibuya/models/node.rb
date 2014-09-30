@@ -28,7 +28,8 @@ module Shibuya
         :nodes,
         where: "name = :name",
         name: name)
-      Node.new(result.firs)
+      return nil if result.nil? or result.count == 0
+      Node.new(result.first)
     end
 
     def self.find(id, db_connection)
@@ -36,7 +37,8 @@ module Shibuya
         :nodes,
         where: "id = :id",
         id: id)
-      Node.new(result.firs)
+      return nil if result.nil? or result.count == 0
+      Node.new(result.first)
     end
 
     def self.find_by_name_of_children(parent_id, name, db_connection)
@@ -44,7 +46,8 @@ module Shibuya
         :nodes,
         where: ["parent_node_id = :parent_node_id", "name = :name"],
         parent_node_id: parent_id, name: name)
-      Node.new(result.firs)
+      return nil if result.nil? or result.count == 0
+      Node.new(result.first)
     end
   end
 end

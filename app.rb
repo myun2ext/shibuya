@@ -34,14 +34,18 @@ module Shibuya
     end
 
     get '/nodes/*' do
-      path = params[:splat].split("/")
+      path = params[:splat].first.split("/")
       @node_path = []
       path.each do |name|
         if @node_path.length == 0
-          @node_path << Node.find_by_name(name, db_connection)
+          node = Node.find_by_name(name, db_connection)
         else
-          @node_path << Node.find_by_name_of_children(@node_path.last, name, db_connection)
+          node = Node.find_by_name_of_children(@node_path.last, name, db_connection)
         end
+        if node == nil
+          return erb "404"
+        end
+        @node_path << node
       end
       @nodes = Node.children(@node_path.last.id, db_connection)
 
