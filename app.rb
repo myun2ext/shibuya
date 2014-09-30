@@ -3,11 +3,15 @@ require 'sinatra'
 module Shibuya
   class App < Sinatra::Base
     get '/' do
-      File.read(File.join('public', 'html', 'index.html'))
+      erb :index
+    end
+
+    get '/login' do
+      erb :login
     end
 
     get '/nodes/*' do
-      File.read(File.join('public', 'html', 'index.html'))
+      erb :index
     end
   end
 end
