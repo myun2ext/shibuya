@@ -11,7 +11,10 @@
 <script>
 $(function(){
   setTimeout(function(){
-    $(".node-item").removeClass("item-hide");
+    $(".node-item").each(function(){
+      $(this).removeClass("item-hide");
+      $(this).css("transition-delay", Math.random() / 3.7 + "s");
+    });
   }, 0);
 });
 </script>
