@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    erubis (2.7.0)
     kgio (2.8.0)
     rack (1.5.2)
     rack-protection (1.5.3)
@@ -20,5 +21,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  erubis
   sinatra
   unicorn
