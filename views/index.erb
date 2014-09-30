@@ -1,8 +1,14 @@
-<h1><%= @node.name %></h1>
+<h1>
+<%
+  path = "/nodes"
+  @node_path.each do |node|
+    path += "/" + node.path %>
+  / <a href="<%= path %>"><%= node.name %></a>
+  <% end %>
+</h1>
 
-<% path = @node_path.map { |node| "/" + node.path }.join("") %>
 <% @nodes.each do |node| %>
-  <a href="/nodes<%= path + "/" + node.path %>">
+  <a href="<%= path + "/" + node.path %>">
     <div class="node-item item-hide" style="background-color: #<%= node.color %>; color: #fff;">
       <h2><%= node.name %></h2>
     </div>
