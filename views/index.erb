@@ -1,7 +1,7 @@
-<%- @nodes.each do |node| %>
+<% @nodes.each do |node| %>
   <a href="/nodes/<%= node.path %>/">
-  <div class="node-item" style="background-color: #<%= node.color %>; color: #fff;">
-    <h2><%= node.name %></h2>
+    <div class="node-item" style="background-color: #<%= node.color %>; color: #fff;">
+      <h2><%= node.name %></h2>
     </div>
   </a>
 <% end %>
