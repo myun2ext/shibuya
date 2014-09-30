@@ -1,3 +1,11 @@
 .item-hide {
   opacity: 0.12;
 }
+
+h1 {
+  margin-top: -5px;
+  margin-bottom: -6px;
+  margin-left: -2px;
+  color: #333;
+  font-size: 280%;
+}

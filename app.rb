@@ -37,11 +37,13 @@ module Shibuya
           end
           @node_path << node
         end
-        @nodes = Node.children(@node_path.last.id, db_connection)
+        @node = @node_path.last
+        @nodes = Node.children(@node.id, db_connection)
       end
     end
 
     get /\A\/(nodes\/?)?\z/ do
+      @node = Node.find(1, db_connection)
       @nodes = Node.children(1, db_connection)
       @node_path = []
       erb :index
