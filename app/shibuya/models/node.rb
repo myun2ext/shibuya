@@ -12,8 +12,9 @@ module Shibuya
     end
 
     def self.children(id, db_connection)
-      result = db_connection.xquery(
-        "SELECT * from nodes where parent_node_id = :parent_node_id",
+      result = db_connection.select(
+        :nodes,
+        where: "parent_node_id = :parent_node_id",
         parent_node_id: id)
       result.map { |node| Node.new(node) }
     end
