@@ -1,9 +1,12 @@
 require 'sinatra'
 require './lib/shibuya/db'
 require './app/shibuya/models/node'
+require './app/shibuya/modules'
 
 module Shibuya
   class App < Sinatra::Base
+    include AssetsRouter
+
     configure do
       enable :logging
       file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
@@ -46,11 +49,7 @@ module Shibuya
       @node = Node.find(1, db_connection)
       @nodes = Node.children(1, db_connection)
       @node_path = []
-      erb :index
-    end
-
-    get '/stylesheets/*' do
-      less ('assets/stylesheets/' + params[:splat].first).to_sym
+      erb :nodes
     end
 
     get '/login' do
@@ -81,7 +80,7 @@ module Shibuya
 
     get '/nodes/*' do
       fetch_node_path
-      erb :index
+      erb :nodes
     end
   end
 end
