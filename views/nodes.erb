@@ -7,16 +7,60 @@
   <% end %>
 </h1>
 
-<% @nodes.each do |node| %>
-  <div><a href="<%= path + "/" + node.path %>">
-    <div class="node-item item-hide" style="background-color: #<%= node.color %>; color: #fff;">
-      <h2><%= node.name %></h2>
-      <div><a href="#"><div class="btn edit-btn">Edit</div></a></div>
+<div class="nodes">
+  <% @nodes.each do |node| %>
+    <div>
+      <a href="<%= path + "/" + node.path %>">
+        <div class="node-item item-hide" style="background-color: #<%= node.color %>; color: #fff;">
+          <h2><%= node.name %></h2>
+          <div>
+            <a href="#" data-toggle="modal" data-target="#edit-node-form-modal"><div class="btn edit-btn">Edit</div></a>
+          </div>
+        </div>
+      </a>
     </div>
-  </a><div>
-<% end %>
+  <% end %>
+</div>
+
+<div style="clear: both;"></div>
+
+<!-- Node edit modal. -->
+<div class="modal hide fade" id="edit-node-form-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <form class="form-horizontal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h2 class="modal-title" id="myModalLabel">Edit <span class="edit-node-name"></span></h2>
+        </div>
+        <div class="modal-body">
+          <!-- Form -->
+          <div class="control-group">
+            <label class="control-label" for="edit-node-form-modal-name">Name</label>
+            <div class="controls">
+              <input type="text" class="input-medium" id="edit-node-form-modal-name" placeholder="Like that 'Tokyo'" maxlength="32">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="edit-node-form-modal-color">Color</label>
+            <div class="controls">
+              <input type="text" class="input-small" id="edit-node-form-modal-color" placeholder="6 Digit color code like the 'FF2233'" maxlength="6">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 
 <script>
+//  Fade-in Effect.
 $(function(){
   setTimeout(function(){
     $(".node-item").each(function(){

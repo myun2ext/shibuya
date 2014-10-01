@@ -6,7 +6,6 @@ require './app/shibuya/modules'
 module Shibuya
   class App < Sinatra::Base
     include AssetsRouter
-
     configure do
       enable :logging
       file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')

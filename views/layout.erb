@@ -1,9 +1,11 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-overrides.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/shibuya.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/nodes.css">
   <script src="/javascripts/jquery-2.1.1.min.js"></script>
+  <script src="/bootstrap/js/bootstrap.min.js"></script>
   <meta name="viewport" content="width=420;" />
 </head>
 <body>
@@ -28,6 +30,7 @@
   </div>
 </div>
 
+<%= @outer_container.call if @outer_container %>
 <div class="navbar navbar-fixed-bottom">
   <div class="navbar-inner">
     <div class="container">
