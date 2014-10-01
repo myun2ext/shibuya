@@ -1,6 +1,6 @@
 module Shibuya
   class Node
-    attr_reader :id, :parent_node_id, :name, :color, :screen_name, :created_at
+    attr_accessor :id, :parent_node_id, :name, :color, :screen_name, :created_at
 
     def initialize(params)
       @id = params["id"]

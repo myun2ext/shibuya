@@ -74,6 +74,8 @@ module Shibuya
     # put
     post %r{\A/nodes/([\w/]+)\z} do
       fetch_node_path
+      @node.name = params[:name]
+      @node.color = params[:color]
       redirect to("/nodes" + ("/" + params[:captures].first).gsub(/\A(.*)\/.+\z/, '\1'))
     end
 
