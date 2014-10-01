@@ -49,6 +49,10 @@ module Shibuya
       erb :index
     end
 
+    get '/stylesheets/*' do
+      less ('assets/stylesheets/' + params[:splat].first).to_sym
+    end
+
     get '/login' do
       erb :login
     end
