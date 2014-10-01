@@ -76,6 +76,7 @@ module Shibuya
       fetch_node_path
       @node.name = params[:name]
       @node.color = params[:color]
+      @node.save(db_connection)
       redirect to("/nodes" + ("/" + params[:captures].first).gsub(/\A(.*)\/.+\z/, '\1'))
     end
 

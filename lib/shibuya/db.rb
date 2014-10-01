@@ -1,5 +1,6 @@
 require 'mysql2-cs-bind'
 require './lib/shibuya/db/query/select'
+require './lib/shibuya/db/query/update'
 
 module Shibuya
   class Db
@@ -10,7 +11,16 @@ module Shibuya
 
     def select(table, params)
       q = Query::Select.new(table, params)
+      p q.query
+      p q.params
       connection.xquery(q.query, q.params)
+    end
+
+    def update(table, params)
+      q = Query::Update.new(table, params)
+      p q.query
+      p q.values
+      connection.xquery(q.query, q.values)
     end
   end
 end

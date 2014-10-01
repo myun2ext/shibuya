@@ -11,6 +11,16 @@ module Shibuya
       @created_at = params["created_at"]
     end
 
+    def save(db_connection)
+      db_connection.update(:nodes,
+        where: { id: id },
+        set: {
+          name: name,
+          color: color
+        }
+      )
+    end
+
     def path
       name.downcase.gsub(" ", "_")
     end
