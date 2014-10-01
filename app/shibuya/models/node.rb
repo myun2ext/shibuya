@@ -14,6 +14,7 @@ module Shibuya
     def path
       name.downcase.gsub(" ", "_")
     end
+    alias id_name path
 
     def self.children(id, db_connection)
       result = db_connection.select(

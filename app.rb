@@ -17,7 +17,7 @@ module Shibuya
       include ::Shibuya::DbConnection
 
       def fetch_node_path
-        path = params[:splat].first.split("/")
+        path = params[:captures].first.split("/")
         @node_path = []
         path.each do |name|
           if @node_path.length == 0
@@ -26,7 +26,7 @@ module Shibuya
             node = Node.find_by_name_of_children(@node_path.last.id, name, db_connection)
           end
           if node == nil
-            return erb "404"
+            return erb :not_found_node
           end
           @node_path << node
         end
@@ -35,7 +35,7 @@ module Shibuya
       end
     end
 
-    get /\A\/(nodes\/?)?\z/ do
+    get %r{\A/(nodes/?)?\z} do
       @node = Node.find(1, db_connection)
       @nodes = Node.children(1, db_connection)
       @node_path = []
@@ -62,13 +62,15 @@ module Shibuya
       erb :new_node
     end
 
+    # post
     post'/nodes/*' do
       fetch_node_path
-      post_node
-       redirect to('/nodes/' + params[:splat])
+      post_node # not implemented!
+      redirect to('/nodes/' + params[:splat])
     end
 
-    get '/nodes/*' do
+    # get
+    get %r{\A/nodes/([\w/]+)(.js)?\z} do
       fetch_node_path
       erb :nodes
     end

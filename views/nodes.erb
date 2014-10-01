@@ -14,7 +14,8 @@
         <div class="node-item item-hide" style="background-color: #<%= node.color %>; color: #fff;">
           <h2><%= node.name %></h2>
           <div>
-            <a href="#" data-toggle="modal" data-target="#edit-node-form-modal"><div class="btn edit-btn">Edit</div></a>
+            <a href="#" data-toggle="modal" data-target="#edit-node-form-modal">
+            <div class="btn edit-btn edit-node-btn" data-node-path="<%= path + "/" + node.path %>">Edit</div></a>
           </div>
         </div>
       </a>
@@ -26,7 +27,7 @@
 
 <!-- Node edit modal. -->
 <div class="modal hide fade" id="edit-node-form-modal" tabindex="-1" role="dialog" aria-hidden="true">
-  <form class="form-horizontal">
+  <form class="form-horizontal" action="/nodes" method="put">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -40,13 +41,13 @@
           <div class="control-group">
             <label class="control-label" for="edit-node-form-modal-name">Name</label>
             <div class="controls">
-              <input type="text" class="input-medium" id="edit-node-form-modal-name" placeholder="Like that 'Tokyo'" maxlength="32">
+              <input type="text" class="input-medium" id="edit-node-form-modal-name" placeholder="Like that 'Tokyo'" maxlength="32"><span class="edit-node-name"></span></input>
             </div>
           </div>
           <div class="control-group">
             <label class="control-label" for="edit-node-form-modal-color">Color</label>
             <div class="controls">
-              <input type="text" class="input-small" id="edit-node-form-modal-color" placeholder="6 Digit color code like the 'FF2233'" maxlength="6">
+              <input type="text" class="input-small" id="edit-node-form-modal-color" placeholder="6 Digit color code like the 'FF2233'" maxlength="6"><span class="edit-node-color"></span></input>
             </div>
           </div>
         </div>
@@ -68,5 +69,12 @@ $(function(){
       $(this).css("transition-delay", Math.random() / 3.7 + "s");
     });
   }, 0);
+
+  $(".edit-node-btn").click(function() {
+    var node_path = $(this).data("node-path");
+    $.get(node_path + ".json", function(data){
+      alert(data);
+    });
+  });
 });
 </script>
