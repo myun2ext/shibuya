@@ -1,6 +1,6 @@
 require 'sinatra'
-require './lib/shibuya/db'
 require './app/shibuya/models/node'
+require './app/shibuya/db_connection'
 require './app/shibuya/modules'
 
 module Shibuya
@@ -15,16 +15,7 @@ module Shibuya
     end
 
     helpers do
-      def db_config
-        {
-          host: "localhost",
-          username: "root",
-          database: "shibuya_development"
-        }
-      end
-      def db_connection
-        Thread.current[:db_connection] ||= Shibuya::Db.new(db_config)
-      end
+      include ::Shibuya::DbConnection
 
       def fetch_node_path
         path = params[:splat].first.split("/")
