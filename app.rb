@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sinatra/json'
 require './app/shibuya/models/node'
 require './app/shibuya/db_connection'
 require './app/shibuya/modules'
@@ -6,6 +7,7 @@ require './app/shibuya/modules'
 module Shibuya
   class App < Sinatra::Base
     include AssetsRouter
+
     configure do
       enable :logging
       file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
@@ -70,9 +72,13 @@ module Shibuya
     end
 
     # get
-    get %r{\A/nodes/([\w/]+)(.js)?\z} do
+    get %r{\A/nodes/([\w/]+)(.json)?\z} do
       fetch_node_path
-      erb :nodes
+      if params[:captures][1] == ".json"
+        json @node.to_hash
+      else
+        erb :nodes
+      end
     end
   end
 end

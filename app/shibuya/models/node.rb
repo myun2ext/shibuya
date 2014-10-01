@@ -16,6 +16,15 @@ module Shibuya
     end
     alias id_name path
 
+    def to_hash
+      ary = instance_variables.map { |name|
+        key = name.to_s.slice(1..-1)
+        value = instance_variable_get(name)
+        [key, value]
+      }
+      Hash[*ary.flatten]
+    end
+
     def self.children(id, db_connection)
       result = db_connection.select(
         :nodes,

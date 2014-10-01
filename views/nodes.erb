@@ -34,20 +34,20 @@
           <button type="button" class="close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h2 class="modal-title" id="myModalLabel">Edit <span class="edit-node-name"></span></h2>
+          <h2 class="modal-title" id="myModalLabel">Edit '<span class="edit-node-name"></span>'</h2>
         </div>
         <div class="modal-body">
           <!-- Form -->
           <div class="control-group">
             <label class="control-label" for="edit-node-form-modal-name">Name</label>
             <div class="controls">
-              <input type="text" class="input-medium" id="edit-node-form-modal-name" placeholder="Like that 'Tokyo'" maxlength="32"><span class="edit-node-name"></span></input>
+              <input type="text" class="input-medium" id="edit-node-form-modal-name" placeholder="Like that 'Tokyo'" maxlength="32">
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="edit-node-form-modal-color">Color</label>
+            <label class="control-label" for="edit-node-form-modal-color">Color code</label>
             <div class="controls">
-              <input type="text" class="input-small" id="edit-node-form-modal-color" placeholder="6 Digit color code like the 'FF2233'" maxlength="6"><span class="edit-node-color"></span></input>
+              #<input type="text" class="input-small" id="edit-node-form-modal-color" placeholder="6 Digit color code like the 'FF2233'" maxlength="6"></input>
             </div>
           </div>
         </div>
@@ -73,7 +73,10 @@ $(function(){
   $(".edit-node-btn").click(function() {
     var node_path = $(this).data("node-path");
     $.get(node_path + ".json", function(data){
-      alert(data);
+      //alert(data);
+      $(".edit-node-name").text(data.name);
+      $("#edit-node-form-modal-name").val(data.name);
+      $("#edit-node-form-modal-color").val(data.color);
     });
   });
 });
