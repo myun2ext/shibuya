@@ -27,14 +27,14 @@
 
 <!-- Node edit modal. -->
 <div class="modal hide fade" id="edit-node-form-modal" tabindex="-1" role="dialog" aria-hidden="true">
-  <form class="form-horizontal" action="/nodes" method="put">
+  <form class="form-horizontal edit-node-form" action="/nodes" method="post">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h2 class="modal-title" id="myModalLabel">Edit '<span class="edit-node-name"></span>'</h2>
+          <h2 class="modal-title">Edit '<span class="edit-node-name"></span>'</h2>
         </div>
         <div class="modal-body">
           <!-- Form -->
@@ -72,8 +72,8 @@ $(function(){
 
   $(".edit-node-btn").click(function() {
     var node_path = $(this).data("node-path");
-    $.get(node_path + ".json", function(data){
-      //alert(data);
+    $.get(node_path + ".json", function(data) {
+      $(".edit-node-form").attr("action", node_path);
       $(".edit-node-name").text(data.name);
       $("#edit-node-form-modal-name").val(data.name);
       $("#edit-node-form-modal-color").val(data.color);

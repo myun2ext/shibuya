@@ -65,10 +65,16 @@ module Shibuya
     end
 
     # post
-    post'/nodes/*' do
+    post'/nodes/' do
       fetch_node_path
       post_node # not implemented!
       redirect to('/nodes/' + params[:splat])
+    end
+
+    # put
+    post %r{\A/nodes/([\w/]+)\z} do
+      fetch_node_path
+      redirect to("/nodes" + ("/" + params[:captures].first).gsub(/\A(.*)\/.+\z/, '\1'))
     end
 
     # get
