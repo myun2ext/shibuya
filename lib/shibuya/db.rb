@@ -16,6 +16,13 @@ module Shibuya
       connection.xquery(q.query, q.params)
     end
 
+    def insert(table, params)
+      q = Query::Insert.new(table, params)
+      p q.query
+      p q.values
+      connection.xquery(q.query, q.values)
+    end
+
     def update(table, params)
       q = Query::Update.new(table, params)
       p q.query
