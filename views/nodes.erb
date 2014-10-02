@@ -25,7 +25,7 @@
     <h3>There is not one exist node!!</h3>
   <% end %>
 
-  <h4>&raquo; <a href="#" data-toggle="modal" data-target="#edit-node-form-modal">Add new node</h4></a>
+  <h4>&raquo; <a href="#" data-toggle="modal" data-target="#edit-node-form-modal" class="add-new-node">Add new node</h4></a>
 </div>
 
 <div style="clear: both;"></div>
@@ -43,6 +43,7 @@
         </div>
         <div class="modal-body">
           <!-- Form -->
+          <input type="hidden" name="_method" value="">
           <div class="control-group">
             <label class="control-label" for="edit-node-form-modal-name">Name</label>
             <div class="controls">
@@ -68,8 +69,8 @@
 </div>
 
 <script>
-//  Fade-in Effect.
 $(function(){
+  //  Nodes: Fade-in Effect.
   setTimeout(function(){
     $(".node-item").each(function(){
       $(this).removeClass("item-hide");
@@ -77,11 +78,27 @@ $(function(){
     });
   }, 0);
 
+  //  Reset New node link.
+  $(".add-new-node").click(function() {
+    var node_path = location.pathname;
+    if ( node_path == "/" )
+      node_path = "/nodes";
+    $(".edit-node-form").attr("action", node_path);
+    $(".edit-node-form input[name=_method").attr("value", "");
+    $(".edit-node-form-modal-title").text("New node");
+    $("#edit-node-form-modal-name").val("");
+    $("#edit-node-form-modal-color").val("");
+  });
+
+  //  Edit node button click.
   $(".edit-node-btn").click(function() {
     var node_path = $(this).data("node-path");
     $.get(node_path + ".json", function(data){
       // Submit path
       $(".edit-node-form").attr("action", node_path);
+
+      //  PUT method using
+      $(".edit-node-form input[name=_method").attr("value", "put");
 
       // modal title
       $(".edit-node-form-modal-title").text("Edit '" + data.name + "'");

@@ -70,7 +70,7 @@ module Shibuya
     end
 
     # post
-    post '/nodes' do
+    post '/nodes/?' do
       @node = Node.new(params)
       @node.insert!(db_connection)
       redirect to('/nodes/')
@@ -79,10 +79,16 @@ module Shibuya
     # put
     post %r{\A/nodes/([\w/]+)\z} do
       fetch_node_path
-      @node.name = params[:name]
-      @node.color = params[:color]
-      @node.save(db_connection)
-      redirect to("/nodes" + ("/" + params[:captures].first).gsub(/\A(.*)\/.+\z/, '\1'))
+      if params[:_method] == "put" || params[:_method] == "PUT"
+        @node.name = params[:name]
+        @node.color = params[:color]
+        @node.save(db_connection)
+        redirect to("/nodes" + ("/" + params[:captures].first).gsub(/\A(.*)\/.+\z/, '\1'))
+      else
+        @node = Node.new(params)
+        @node.insert!(db_connection)
+        redirect to('/nodes/')
+      end
     end
 
     # get
