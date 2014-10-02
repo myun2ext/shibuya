@@ -22,11 +22,22 @@ CREATE TABLE nodes (
   name VARCHAR(64) NOT NULL,
   color CHAR(6) NOT NULL,
   screen_name VARCHAR(256) NOT NULL,
+-- last_updated_user_id BIGINT,
   created_at datetime NOT NULL,
   PRIMARY KEY (id)
 );
 CREATE UNIQUE INDEX node_name_idx ON nodes (parent_node_id, name);
 ALTER TABLE nodes ADD FOREIGN KEY(parent_node_id) REFERENCES nodes(id);
+-- ALTER TABLE nodes ADD FOREIGN KEY(last_updated_user_id) REFERENCES users(id);
+
+-- node_owners table
+CREATE TABLE node_owners (
+  node_id BIGINT NOT NULL,
+  user_id BIGINT NOT NULL,
+  PRIMARY KEY (node_id, user_id)
+);
+ALTER TABLE node_owners ADD FOREIGN KEY(node_id) REFERENCES nodes(id);
+ALTER TABLE node_owners ADD FOREIGN KEY(user_id) REFERENCES users(id);
 
 -- favorites table
 CREATE TABLE favorites (
