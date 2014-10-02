@@ -1,6 +1,7 @@
 require 'mysql2-cs-bind'
 require './lib/shibuya/db/query/select'
 require './lib/shibuya/db/query/update'
+require './lib/shibuya/db/query/insert'
 
 module Shibuya
   class Db

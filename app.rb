@@ -18,6 +18,11 @@ module Shibuya
     helpers do
       include ::Shibuya::DbConnection
 
+      def fetch_root_node
+        name = "Tokyo"
+        @root_node = Node.find_by_name_of_children(nil, name, db_connection)
+      end
+
       def fetch_node_path
         path = params[:captures].first.split("/")
         @node_path = []
@@ -65,10 +70,10 @@ module Shibuya
     end
 
     # post
-    post'/nodes/' do
-      fetch_node_path
-      post_node # not implemented!
-      redirect to('/nodes/' + params[:splat])
+    post '/nodes' do
+      @node = Node.new(params)
+      @node.insert!(db_connection)
+      redirect to('/nodes/')
     end
 
     # put

@@ -6,7 +6,7 @@ module Shibuya
 
         def initialize(table, params)
           @values = []
-          @query = "INSERT INTO #{table} SET ("
+          @query = "INSERT INTO #{table} ("
 
           @query += params[:values].map { |key, value|
             @values << value
@@ -14,7 +14,7 @@ module Shibuya
           }.join(", ")
 
           @query += ") VALUES ("
-          @query += "?, " * (params[:set].count - 1) + "?"
+          @query += "?, " * (params[:values].length - 1) + "?"
           @query += ")"
         end
       end

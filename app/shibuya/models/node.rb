@@ -11,6 +11,16 @@ module Shibuya
       @created_at = params["created_at"]
     end
 
+    def insert!(db_connection)
+      db_connection.insert(:nodes,
+        values: {
+          name: name,
+          color: color,
+          created_at: Time.now
+        }
+      )
+    end
+
     def save(db_connection)
       db_connection.update(:nodes,
         where: { id: id },
