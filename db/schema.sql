@@ -21,7 +21,8 @@ CREATE TABLE nodes (
   parent_node_id BIGINT,
   name VARCHAR(64) NOT NULL,
   color CHAR(6) NOT NULL,
-  screen_name VARCHAR(256) NOT NULL,
+  screen_name VARCHAR(255) NOT NULL,
+  description TEXT,
 -- last_updated_user_id BIGINT,
   created_at datetime NOT NULL,
   PRIMARY KEY (id)
@@ -55,6 +56,7 @@ CREATE TABLE chat_logs (
   id BIGINT NOT NULL AUTO_INCREMENT,
   node_id BIGINT NOT NULL,
   user_id BIGINT NOT NULL,
+  text TEXT NOT NULL,
   created_at datetime NOT NULL,
   PRIMARY KEY (id)
 );

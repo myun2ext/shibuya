@@ -13,9 +13,11 @@ INSERT INTO nodes (name, screen_name, color, created_at, parent_node_id) VALUES
   ("Dogenzaka",   "道玄坂", "7F1033", NOW(), 2),
   ("Nanpeidai",   "南平台", "2A32C1", NOW(), 2),
 
-  ("Shibuya109",  "渋谷109", "EA59BA", NOW(), 7)
+  ("Shibuya109",  "渋谷109", "EA59BA", NOW(), 7),
+
+  ("Kawasaki(root)","川崎", "37B7DD", NOW(), NULL)
 ;
 
 INSERT INTO users (name, screen_name, encrypted_password, password_salt, created_at) VALUES
-  ("test1", "Test User", "0000", "000000", NOW())
+  ("myun2", "myun2 (root)", "0000", "000000", NOW())
 ;
