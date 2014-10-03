@@ -1,5 +1,11 @@
 require 'sinatra'
 require 'sinatra/json'
+
+$:.unshift File.dirname(__FILE__)
+$:.unshift File.expand_path('./lib/shibuya_record/', File.dirname(__FILE__))
+
+require 'shibuya_record'
+
 require './app/shibuya/models/node'
 require './app/shibuya/db_connection'
 require './app/shibuya/modules'
