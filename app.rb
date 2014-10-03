@@ -13,6 +13,7 @@ module Shibuya
       file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
       file.sync = true
       use Rack::CommonLogger, file
+      enable :sessions
     end
 
     helpers do
@@ -51,8 +52,22 @@ module Shibuya
       erb :nodes
     end
 
+    get '/about' do
+      erb :about
+    end
+
+    get '/favorites' do
+      erb :favorites
+    end
+
     get '/login' do
       erb :login
+    end
+
+    post '/login' do
+      session[:user_name] = params[:name]
+      p session[:user_name]
+      redirect to("/")
     end
 
     get '/chat_logs/*' do
