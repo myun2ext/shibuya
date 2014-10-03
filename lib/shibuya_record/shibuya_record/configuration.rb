@@ -3,6 +3,7 @@ class ShibuyaRecord::Configuration; end
 require 'shibuya_record/configuration/connection_settings'
 
 class ShibuyaRecord::Configuration
+  attr_reader :connection_settings
   @connection_settings = nil
 
   def initialize
