@@ -7,6 +7,7 @@ $:.unshift File.expand_path('./lib/shibuya_record/', File.dirname(__FILE__))
 require 'shibuya_record'
 
 require './app/shibuya/models/node'
+require './app/shibuya/models/chat_log'
 require './app/shibuya/db_connection'
 require './app/shibuya/modules'
 
