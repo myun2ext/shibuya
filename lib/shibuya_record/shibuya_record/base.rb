@@ -4,8 +4,9 @@ class ShibuyaRecord::Base
   extend ShibuyaRecord::Declaration
 
   def initialize(params)
-    @attributes.each do |attribute_name|
-      self.send(attribute_name + "=", params[attribute_name]) if params[attribute_name]
+    self.class.record_attributes.each do |attribute|
+      value = params[attribute.to_s] || params[attribute]
+      self.send(attribute.to_s + "=", value)
     end
   end
 end
