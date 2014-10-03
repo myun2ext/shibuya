@@ -91,7 +91,7 @@ module Shibuya
         @node = Node.new(params)
         @node.parent_node_id = (@latest_node.id || 1)
         @node.insert!(db_connection)
-        redirect to('/nodes/')
+        redirect to("/nodes/" + params[:captures].first)
       end
     end
 
