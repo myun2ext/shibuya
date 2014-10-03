@@ -1,4 +1,6 @@
-module ShibuyaRecord; end
+module ShibuyaRecord
+  module Query; end
+end
 
 require 'shibuya_record/base'
 require 'shibuya_record/configuration'

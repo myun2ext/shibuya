@@ -1,4 +1,4 @@
-class ShibuyaRecord::QueryGenerator::Insert
+class ShibuyaRecord::Query::Insert
   attr_reader :query, :values
 
   def initialize(table, params)

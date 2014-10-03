@@ -1,4 +1,4 @@
-class ShibuyaRecord::QueryGenerator::Where
+class ShibuyaRecord::Query::Where
   attr_reader :query, :values
 
   def initialize(conditions)

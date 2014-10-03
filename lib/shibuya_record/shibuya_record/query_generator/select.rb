@@ -1,4 +1,4 @@
-class ShibuyaRecord::QueryGenerator::Select
+class ShibuyaRecord::Query::Select
   attr_reader :query, :values
 
   def initialize(table, params)
