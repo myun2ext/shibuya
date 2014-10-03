@@ -6,7 +6,7 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/nodes.css">
   <script src="/javascripts/jquery-2.1.1.min.js"></script>
   <script src="/bootstrap/js/bootstrap.min.js"></script>
-  <meta name="viewport" content="width=420" />
+  <meta name="viewport" content="width=376" />
 </head>
 <body>
 
@@ -19,6 +19,9 @@
         <li><a href="/settings">Profile</a></li>
         <li><a href="/favorites">Favs.</a></li>
         <li><a href="/about">About</a></li>
+        <% if session[:user_name] != nil %>
+          <li> aa <%= session[:user_name] %></li>
+        <% end %>
       </ul>
     </div>
   </div>
