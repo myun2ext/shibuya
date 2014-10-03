@@ -6,7 +6,7 @@ class ShibuyaRecord::Query::Select
     @query = "SELECT * FROM #{table}"
 
     if params[:where]
-      where = Where.new(params)
+      where = ShibuyaRecord::Query::Where.new(params)
       @values += where.values
       @query += where.query
     end

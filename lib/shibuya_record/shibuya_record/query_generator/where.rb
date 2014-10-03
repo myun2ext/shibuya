@@ -5,7 +5,7 @@ class ShibuyaRecord::Query::Where
     @values = []
 
     @query = " WHERE "
-    @query += params[:where].map { |key, value|
+    @query += conditions.map { |key, value|
       @values << value
       "#{key} = ?"
     }.join(" AND ")

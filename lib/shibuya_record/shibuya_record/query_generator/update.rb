@@ -11,7 +11,7 @@ class ShibuyaRecord::Query::Update
     }.join(", ")
 
     if params[:where]
-      where = Where.new(params)
+      where = ShibuyaRecord::Query::Where.new(params)
       @query += where.query
       @values += where.values
     end

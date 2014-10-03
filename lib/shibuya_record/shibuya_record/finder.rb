@@ -10,8 +10,8 @@ module ShibuyaRecord::Finder
     end
   end
 
-  def self.find_by(key, value)
-    result = Query::Select.new(
+  def find_by(key, value)
+    result = ShibuyaRecord::Query::Select.new(
       table_name,
       where: { key.to_sym => value })
 
@@ -19,7 +19,7 @@ module ShibuyaRecord::Finder
     self.class.new(result.first)
   end
 
-  def self.find(value)
+  def find(value)
     find_by(:id, value)
   end
 end
