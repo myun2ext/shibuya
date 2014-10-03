@@ -8,7 +8,7 @@ require 'shibuya_record'
 
 require './app/shibuya/models/node'
 require './app/shibuya/models/chat_log'
-require './app/shibuya/db_connection'
+require './app/shibuya/db_config'
 require './app/shibuya/modules'
 
 module Shibuya
@@ -21,6 +21,8 @@ module Shibuya
       file.sync = true
       use Rack::CommonLogger, file
       enable :sessions
+      #ShibuyaRecord.configure { |conf| conf.db_connection_settings = Shibuya::DbConfig.db_config }
+      ShibuyaRecord.configuration = Shibuya::DbConfig.db_config
     end
 
     helpers do
