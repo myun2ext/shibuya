@@ -4,6 +4,9 @@ source "https://rubygems.org"
 gem 'sinatra'
 gem 'sinatra-contrib'
 
+# Crypt Library
+gem 'scrypt'
+
 # Server provide
 gem 'unicorn'
 
