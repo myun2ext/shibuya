@@ -2,24 +2,16 @@ module Shibuya
   class Db
     module Query
       class Select
-        attr_reader :query, :params
+        attr_reader :query, :values
 
         def initialize(table, params)
-          @params = []
+          @values = []
           @query = "SELECT * FROM #{table}"
 
           if params[:where]
-            @query += " WHERE "
-            conditions = params[:where]
-            conditions = [conditions] unless conditions.is_a? Array
-            conditions.map do |where|
-              where.gsub!(/:([\w]+)/) do
-                @params << params[$1.to_sym]
-                "?"
-              end
-            end
-
-            @query += conditions.join(" AND ")
+            where = Where.new(params)
+            @values += where.values
+            @query += where.query
           end
         end
       end

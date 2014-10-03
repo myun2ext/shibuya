@@ -14,11 +14,9 @@ module Shibuya
           }.join(", ")
 
           if params[:where]
-            @query += " WHERE "
-            @query += params[:where].map { |key, value|
-              @values << value
-              "#{key} = ?"
-            }.join(" AND ")
+            where = Where.new(params)
+            @query += where.query
+            @values += where.values
           end
         end
       end
