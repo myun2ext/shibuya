@@ -38,6 +38,7 @@ module Shibuya
           @node_path << node
         end
         @node = @node_path.last
+        @latest_node = @node
         @nodes = Node.children(@node.id, db_connection)
       end
     end
@@ -45,6 +46,7 @@ module Shibuya
     get %r{\A/(nodes/?)?\z} do
       @node = Node.find(1, db_connection)
       @nodes = Node.children(1, db_connection)
+      @latest_node = @node
       @node_path = []
       erb :nodes
     end
@@ -72,6 +74,7 @@ module Shibuya
     # post
     post '/nodes/?' do
       @node = Node.new(params)
+      @node.parent_node_id = 1
       @node.insert!(db_connection)
       redirect to('/nodes/')
     end
@@ -86,6 +89,7 @@ module Shibuya
         redirect to("/nodes" + ("/" + params[:captures].first).gsub(/\A(.*)\/.+\z/, '\1'))
       else
         @node = Node.new(params)
+        @node.parent_node_id = (@latest_node.id || 1)
         @node.insert!(db_connection)
         redirect to('/nodes/')
       end

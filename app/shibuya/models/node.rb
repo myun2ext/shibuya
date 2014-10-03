@@ -14,9 +14,10 @@ module Shibuya
     def insert!(db_connection)
       db_connection.insert(:nodes,
         values: {
+          parent_node_id: parent_node_id,
           name: name,
           color: color,
-          created_at: Time.now
+          created_at: Time.now,
         }
       )
     end
