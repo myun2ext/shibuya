@@ -45,24 +45,6 @@ module Shibuya
       result.map { |node| Node.new(node) }
     end
 
-    def self.find_by_name(name, db_connection)
-      result = db_connection.select(
-        :nodes,
-        where: "name = :name",
-        name: name)
-      return nil if result.nil? or result.count == 0
-      Node.new(result.first)
-    end
-
-    def self.find(id, db_connection)
-      result = db_connection.select(
-        :nodes,
-        where: "id = :id",
-        id: id)
-      return nil if result.nil? or result.count == 0
-      Node.new(result.first)
-    end
-
     def self.find_by_name_of_children(parent_id, name, db_connection)
       result = db_connection.select(
         :nodes,

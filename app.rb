@@ -51,7 +51,7 @@ module Shibuya
     end
 
     get %r{\A/(nodes/?)?\z} do
-      @node = Node.find(1, db_connection)
+      @node = Node.find(1)
       @nodes = Node.children(1, db_connection)
       @latest_node = @node
       @node_path = []
