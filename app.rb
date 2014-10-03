@@ -21,13 +21,10 @@ module Shibuya
       file.sync = true
       use Rack::CommonLogger, file
       enable :sessions
-      #ShibuyaRecord.configure { |conf| conf.db_connection_settings = Shibuya::DbConfig.db_config }
-      ShibuyaRecord.configuration = Shibuya::DbConfig.db_config
+      ShibuyaRecord.configure { |conf| conf.db_connection_settings = Shibuya::DbConfig.db_config }
     end
 
     helpers do
-      include ::Shibuya::DbConnection
-
       def fetch_root_node
         name = "Tokyo"
         @root_node = Node.find_by_name_of_children(nil, name, db_connection)
