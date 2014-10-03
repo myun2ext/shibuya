@@ -11,9 +11,10 @@ module ShibuyaRecord::Finder
   end
 
   def find_by(key, value)
-    result = ShibuyaRecord::Query::Select.new(
+    q = ShibuyaRecord::Query::Select.new(
       table_name,
       where: { key.to_sym => value })
+    result = self.db_connection.query(q.query, q.values)
 
     return nil if result.nil? or result.count == 0
     self.class.new(result.first)

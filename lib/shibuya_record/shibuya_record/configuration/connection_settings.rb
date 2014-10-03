@@ -8,4 +8,15 @@ class ShibuyaRecord::Configuration::ConnectionSettings
     @username = params[:username]
     @password = params[:password]
   end
+
+  alias adapter driver
+
+  def to_hash
+    {
+      database: database,
+      host: host,
+      username: username,
+      password: password
+    }
+  end
 end

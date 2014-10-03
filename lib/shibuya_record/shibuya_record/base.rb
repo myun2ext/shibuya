@@ -18,4 +18,12 @@ class ShibuyaRecord::Base
   def self.table_name
     ShibuyaRecord::StringUtil.underscore(self.class.name)
   end
+
+  def self.db_connection
+    @@db_connection ||= ShibuyaRecord::DefaultConnection.connection
+  end
+
+  def db_connection
+    @db_connection ||= self.class.db_connection
+  end
 end
