@@ -16,7 +16,7 @@ class ShibuyaRecord::Base
   end
 
   def self.table_name
-    ShibuyaRecord::StringUtil.underscore(self.class.name)
+    ShibuyaRecord::StringUtil.underscore(name) + "s"
   end
 
   def self.db_connection

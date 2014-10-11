@@ -10,17 +10,24 @@ module ShibuyaRecord::Finder
     end
   end
 
-  def find_by(key, value)
-    q = ShibuyaRecord::Query::Select.new(
-      table_name,
-      where: { key.to_sym => value })
-    result = self.db_connection.query(q.query, q.values)
+  def method_missing(method, *args)
+    try_find_method(method, args)
+  end
 
+  def find_by(key, value)
+    result = select(key.to_sym => value)
     return nil if result.nil? or result.count == 0
-    self.class.new(result.first)
+    new(result.first)
   end
 
   def find(value)
     find_by(:id, value)
+  end
+
+  def select(conditions)
+    q = ShibuyaRecord::Query::Select.new(
+      table_name,
+      where: conditions)
+    self.db_connection.query(q.query, q.values)
   end
 end

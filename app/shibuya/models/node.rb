@@ -2,7 +2,7 @@ module Shibuya
   class Node < ShibuyaRecord::Base
     attributes :id, :parent_node_id, :name, :color, :screen_name, :created_at
 
-    def insert!(db_connection)
+    def insert!()
       db_connection.insert(:nodes,
         values: {
           parent_node_id: parent_node_id,
@@ -13,7 +13,7 @@ module Shibuya
       )
     end
 
-    def save(db_connection)
+    def save()
       db_connection.update(:nodes,
         where: { id: id },
         set: {
@@ -37,21 +37,19 @@ module Shibuya
       Hash[*ary.flatten]
     end
 
-    def self.children(id, db_connection)
-      result = db_connection.select(
-        :nodes,
-        where: "parent_node_id = :parent_node_id",
-        parent_node_id: id)
+    def self.children(id)
+      result = select(parent_node_id: id)
       result.map { |node| Node.new(node) }
     end
 
-    def self.find_by_name_of_children(parent_id, name, db_connection)
-      result = db_connection.select(
-        :nodes,
-        where: ["parent_node_id = :parent_node_id", "name = :name"],
-        parent_node_id: parent_id, name: name)
+    def self.find_by_name_of_children(parent_id, name)
+      result = select(parent_node_id: parent_id, name: name)
       return nil if result.nil? or result.count == 0
       Node.new(result.first)
+    end
+
+    def self.name
+      "Node"
     end
   end
 end

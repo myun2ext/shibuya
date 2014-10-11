@@ -27,7 +27,7 @@ module Shibuya
     helpers do
       def fetch_root_node
         name = "Tokyo"
-        @root_node = Node.find_by_name_of_children(nil, name, db_connection)
+        @root_node = Node.find_by_name_of_children(nil, name)
       end
 
       def fetch_node_path
@@ -35,9 +35,9 @@ module Shibuya
         @node_path = []
         path.each do |name|
           if @node_path.length == 0
-            node = Node.find_by_name(name, db_connection)
+            node = Node.find_by_name(name)
           else
-            node = Node.find_by_name_of_children(@node_path.last.id, name, db_connection)
+            node = Node.find_by_name_of_children(@node_path.last.id, name)
           end
           if node == nil
             return erb :not_found_node
@@ -46,13 +46,13 @@ module Shibuya
         end
         @node = @node_path.last
         @latest_node = @node
-        @nodes = Node.children(@node.id, db_connection)
+        @nodes = Node.children(@node.id)
       end
     end
 
     get %r{\A/(nodes/?)?\z} do
       @node = Node.find(1)
-      @nodes = Node.children(1, db_connection)
+      @nodes = Node.children(1)
       @latest_node = @node
       @node_path = []
       erb :nodes
