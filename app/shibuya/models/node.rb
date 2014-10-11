@@ -3,7 +3,7 @@ module Shibuya
     attributes :id, :parent_node_id, :name, :color, :screen_name, :created_at
 
     def insert!()
-      db_connection.insert(:nodes,
+      insert(
         values: {
           parent_node_id: parent_node_id,
           name: name,
@@ -14,7 +14,7 @@ module Shibuya
     end
 
     def save()
-      db_connection.update(:nodes,
+      update(
         where: { id: id },
         set: {
           name: name,
